@@ -35,7 +35,7 @@ def Create_ServerConnection_And_Send_Mail(receiver_email, message, sender_email,
         with smtplib.SMTP(smtp_server, smtp_port) as server:
             server.starttls()
             server.login(sender_email, password)
-            # server.sendmail(sender_email, receiver_email, message.as_string())
+            server.sendmail(sender_email, receiver_email, message.as_string())
         logging.info(f"Email sent successfully to: {receiver_email}")
     except Exception as e:
         logging.error(f"Failed to send email to {receiver_email}: {e}")
