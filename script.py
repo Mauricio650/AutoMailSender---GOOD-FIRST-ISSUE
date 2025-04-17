@@ -5,6 +5,8 @@ import logging
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from email.mime.application import MIMEApplication
+from dotenv import load_dotenv
+load_dotenv()
 
 # Configure logging
 logging.basicConfig(
@@ -13,8 +15,10 @@ logging.basicConfig(
     format='%(asctime)s - %(levelname)s - %(message)s'
 )
 
-sender_email = "YOUR EMAIL" 
-password = "YOUR PASSWORD"
+sender_email = os.getenv("EMAIL_SENDER")
+password = os.getenv("EMAIL_PASSWORD")
+
+print(f"Email obtained from .env: {sender_email}")
 
 def get_Client_Data(initialCounter):
     try:
