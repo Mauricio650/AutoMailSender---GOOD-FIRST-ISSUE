@@ -1,3 +1,0 @@
-2025-04-22 18:36:18,946 - ERROR - Error attaching file C:\YOUR PATH: [Errno 2] No such file or directory: 'C:\\YOUR PATH'
-2025-04-22 18:36:24,053 - ERROR - Failed to send email to michifu@gmail.com: (535, b'5.7.3 Authentication unsuccessful [AS4PR09CA0012.eurprd09.prod.outlook.com 2025-04-22T16:36:24.031Z 08DD80F8E9A7DF9B]')
-2025-04-22 18:36:24,054 - INFO - Finished sending all emails.
