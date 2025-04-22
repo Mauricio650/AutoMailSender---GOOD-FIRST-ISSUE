@@ -105,11 +105,9 @@ venv\Scripts\python.exe script.py
 
 ## 📌 Additional Notes
 
-- You can adjust the email sending range in this line:
-
-```python
-for initialCounter in range(0, 2):
-```
+- The script automatically processes all rows in the Excel file
+- You can include additional validations before sending emails
+- The script can update the Excel file in case of invalid data (like missing emails)
 
 - You can also include additional validations before sending emails.
 - The script can update the Excel file in case of invalid data (like missing emails).
