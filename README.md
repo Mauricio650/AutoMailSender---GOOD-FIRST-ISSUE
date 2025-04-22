@@ -108,10 +108,6 @@ venv\Scripts\python.exe script.py
 - The script automatically processes all rows in the Excel file
 - You can include additional validations before sending emails
 - The script can update the Excel file in case of invalid data (like missing emails)
-
-- You can also include additional validations before sending emails.
-- The script can update the Excel file in case of invalid data (like missing emails).
-
 ---
 
 ## 📄 License
