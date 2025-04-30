@@ -14,11 +14,11 @@ class SingleEmailForm(forms.Form):
     recipient_email = forms.EmailField(label="Recipient Email")
     subject = forms.CharField(max_length=255)
     body = forms.CharField(widget=forms.Textarea)
-    attachments = forms.FileField(widget=forms.ClearableFileInput(attrs={'multiple': True}), required=False)
+    attachments = forms.FileField(widget=forms.FileInput(attrs={'multiple': False}), required=False)
 
 class BulkEmailForm(forms.Form):
     """Form for sending bulk emails"""
     excel_file = forms.FileField(label="Excel File (.xlsx)")
     subject = forms.CharField(max_length=255)
     body = forms.CharField(widget=forms.Textarea, help_text="You can use {client_name} and {client_id} as placeholders")
-    attachments = forms.FileField(widget=forms.ClearableFileInput(attrs={'multiple': True}), required=False)
+    attachments = forms.FileField(widget=forms.FileInput(attrs={'multiple': False}), required=False)

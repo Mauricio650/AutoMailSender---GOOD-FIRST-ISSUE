@@ -1,0 +1,68 @@
+{% extends 'emailapp/base.html' %}
+
+{% block title %}Email Logs - AutoMailSender{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h4>Email Logs</h4>
+            </div>
+            <div class="card-body">
+                {% if logs %}
+                    <div class="table-responsive">
+                        <table class="table table-striped table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Date/Time</th>
+                                    <th>Recipient</th>
+                                    <th>Subject</th>
+                                    <th>Attachments</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for log in logs %}
+                                    <tr class="{% if log.status == 'success' %}table-success{% else %}table-danger{% endif %}">
+                                        <td>{{ log.sent_at|date:"M d, Y H:i:s" }}</td>
+                                        <td>{{ log.recipient }}</td>
+                                        <td>{{ log.subject|truncatechars:40 }}</td>
+                                        <td>{{ log.attachment_names|default:"None"|truncatechars:30 }}</td>
+                                        <td>
+                                            <span class="badge {% if log.status == 'success' %}bg-success{% else %}bg-danger{% endif %}">
+                                                {{ log.status|title }}
+                                            </span>
+                                            {% if log.error_message %}
+                                                <button type="button" class="btn btn-sm btn-link" 
+                                                        data-bs-toggle="tooltip" data-bs-placement="top" 
+                                                        title="{{ log.error_message }}">
+                                                    <small>Details</small>
+                                                </button>
+                                            {% endif %}
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                {% else %}
+                    <div class="alert alert-info">
+                        No email logs found.
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+{% block extra_scripts %}
+<script>
+    // Initialize tooltips
+    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+        return new bootstrap.Tooltip(tooltipTriggerEl)
+    })
+</script>
+{% endblock %}
+{% endblock %}

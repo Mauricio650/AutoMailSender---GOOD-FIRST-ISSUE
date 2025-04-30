@@ -1,0 +1,89 @@
+{% extends 'emailapp/base.html' %}
+
+{% block title %}AutoMailSender - Home{% endblock %}
+
+{% block content %}
+<div class="px-4 py-5 my-5 text-center">
+    <h1 class="display-5 fw-bold">📧 AutoMailSender</h1>
+    <div class="col-lg-6 mx-auto">
+        <p class="lead mb-4">
+            A simple web application for sending emails to individuals or groups from an Excel file.
+        </p>
+        <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+            <a href="{% url 'send_email' %}" class="btn btn-primary btn-lg px-4 gap-3">Send Single Email</a>
+            <a href="{% url 'bulk_email' %}" class="btn btn-outline-primary btn-lg px-4">Send Bulk Emails</a>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">🔧 Configure Settings</h5>
+                <p class="card-text">Set up your email credentials and SMTP server settings.</p>
+                <a href="{% url 'email_settings' %}" class="btn btn-sm btn-outline-secondary">Settings</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">📝 Send Single Email</h5>
+                <p class="card-text">Send an email to a single recipient with optional attachments.</p>
+                <a href="{% url 'send_email' %}" class="btn btn-sm btn-outline-secondary">Send Email</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">📊 Bulk Emails</h5>
+                <p class="card-text">Send emails to multiple recipients from an Excel file.</p>
+                <a href="{% url 'bulk_email' %}" class="btn btn-sm btn-outline-secondary">Bulk Email</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">📋 Excel Format</h5>
+                <p class="card-text">For bulk emails, your Excel file should have at least these columns:</p>
+                <table class="table table-sm">
+                    <thead>
+                        <tr>
+                            <th>Client ID</th>
+                            <th>Client Name</th>
+                            <th>Client Email</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1001</td>
+                            <td>John Doe</td>
+                            <td>john@example.com</td>
+                        </tr>
+                        <tr>
+                            <td>1002</td>
+                            <td>Jane Smith</td>
+                            <td>jane@example.com</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">📄 Email Logs</h5>
+                <p class="card-text">View logs of all sent emails.</p>
+                <a href="{% url 'email_logs' %}" class="btn btn-sm btn-outline-secondary">View Logs</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
