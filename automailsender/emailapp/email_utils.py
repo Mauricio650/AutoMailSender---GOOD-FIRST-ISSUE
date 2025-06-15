@@ -6,12 +6,22 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.application import MIMEApplication
 from django.conf import settings
 import tempfile
+from dotenv import load_dotenv
+
+load_dotenv()
+
+
+sender_email = os.getenv('EMAIL_HOST_USER')
+smtp_server = os.getenv('smtp_server')
+password = os.getenv('EMAIL_HOST_PASSWORD')
+smtp_port = int(os.getenv('smtp_port', 465))
+
 
 
 def create_server_connection_and_send_mail(receiver_email, message, sender_email, password):
     """Establish SMTP connection and send email"""
-    smtp_server = 'smtp.office365.com'  # Change as needed
-    smtp_port = 587
+    smtp_server = os.getenv('smtp_server')  # Change as needed
+    smtp_port = int(os.getenv('smtp_port', 465))
 
     with smtplib.SMTP(smtp_server, smtp_port) as server:
         server.starttls()  # start the safe TLS connection

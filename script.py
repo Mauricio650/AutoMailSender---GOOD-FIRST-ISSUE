@@ -4,11 +4,15 @@ import pandas as pd
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from email.mime.application import MIMEApplication
+from dotenv import load_dotenv
+
+load_dotenv()
 
 
 
-sender_email = "YOUR EMAIL" 
-password = "YOUR PASSWORD"
+sender_email = os.getenv('EMAIL_HOST_USER') 
+password = os.getenv('EMAIL_HOST_PASSWORD')
+smtp_server = os.getenv('smtp_server')
 
 def get_Client_Data(initialCounter):
     
@@ -23,11 +27,12 @@ def get_Client_Data(initialCounter):
 def Create_ServerConnection_And_Send_Mail(receiver_email, message, sender_email, password):
     # sender
     sender_email = sender_email
-    password = password
+    smtp_server = os.getenv('smtp_server')
+    password = os.getenv('EMAIL_HOST_PASSWORD')
 
     #server configuration SMTP
-    smtp_server = 'smtp.office365.com' #(gmail = 'smtp.gmail.com') YOU MUST TO CHANGE THE SERVER IS YOUR EMAIL IS NOT OUTLOOK - SEARCH YOUR SMTP SERVER ON CHAT GPT
-    smtp_port = 587
+    smtp_server = os.getenv('smtp_server') #(gmail = 'smtp.gmail.com') YOU MUST TO CHANGE THE SERVER IS YOUR EMAIL IS NOT OUTLOOK - SEARCH YOUR SMTP SERVER ON CHAT GPT
+    smtp_port = int(os.getenv('smtp_port', 8000))
 
     with smtplib.SMTP(smtp_server, smtp_port) as server:
         server.starttls() # start the safe TLS connection
@@ -99,34 +104,3 @@ def Send_Email(getClientData, BuilderMessage, AttachFiles, CreateServerConnectio
 
 # main function
 Send_Email(get_Client_Data, Builder_Message, Attach_Files, Create_ServerConnection_And_Send_Mail)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
