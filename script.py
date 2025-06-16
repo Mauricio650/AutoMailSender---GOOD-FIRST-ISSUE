@@ -9,7 +9,6 @@ from dotenv import load_dotenv
 load_dotenv()
 
 
-
 sender_email = os.getenv('EMAIL_HOST_USER') 
 password = os.getenv('EMAIL_HOST_PASSWORD')
 smtp_server = os.getenv('smtp_server')
@@ -67,7 +66,6 @@ def Attach_Files(message):
         message.attach(part) 
 
 
-
 # MAIN FUNCTION
 def Send_Email(getClientData, BuilderMessage, AttachFiles, CreateServerConnection):
 
@@ -98,8 +96,6 @@ def Send_Email(getClientData, BuilderMessage, AttachFiles, CreateServerConnectio
             print('MAIL SENT :', arrayData[1])
 
     return print('--------------------THE MAILS WERE SENT SUCCESSFULLY------------------')
-
-
 
 
 # main function
