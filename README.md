@@ -57,11 +57,23 @@ It should have at least three columns in this order:
 1. Clone this repository or copy the code to your local project.
 2. Open `script.py` and configure these variables:
 
+# Carga de variables de entorno desde el archivo .env
 ```python
-sender_email = "your_email@example.com"
-password = "YOUR_PASSWORD_OR_APP_PASSWORD"
+from dotenv import load_dotenv
+import os
+
+load_dotenv()  # Cargar las variables del archivo .env
+
+sender_email = os.getenv("SENDER_EMAIL")
+password = os.getenv("EMAIL_PASSWORD")
 ```
 
+🔧 Configuración del archivo .env
+Antes de ejecutar el script, crea un archivo .env en la raíz del proyecto y agrega tus credenciales de esta manera:
+```python
+SENDER_EMAIL=your_email@example.com
+EMAIL_PASSWORD=your_password_or_app_password
+```
 3. Change the `smtp_server` and `smtp_port` if you're not using Outlook:
 
 | Provider   | SMTP Server        | Port |
@@ -105,20 +117,25 @@ venv\Scripts\python.exe script.py
 
 ## 📌 Additional Notes
 
-- You can adjust the email sending range in this line:
-
-```python
-for initialCounter in range(0, 2):
-```
-
-- You can also include additional validations before sending emails.
-- The script can update the Excel file in case of invalid data (like missing emails).
-
+- The script automatically processes all rows in the Excel file
+- You can include additional validations before sending emails
+- The script can update the Excel file in case of invalid data (like missing emails)
 ---
 
 ## 📄 License
 
 MIT License.
+---
+
+## 🤝 Contributing
+
+Contributions are welcome. Please follow these steps:
+
+1. Fork the project
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
 ---
 
