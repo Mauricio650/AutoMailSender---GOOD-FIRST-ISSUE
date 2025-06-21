@@ -14,8 +14,8 @@
                     <h5>Email Sending Summary</h5>
                     <p>
                         <strong>Total:</strong> {{ results|length }} emails<br>
-                        <strong>Success:</strong> {{ results|dictsortbyvalue:"status"|dictsort:"status"|first }}
-                        <strong>Failed:</strong> {{ results|dictsortbyvalue:"status"|dictsort:"status"|last }}
+                        <strong>Success:</strong> {{ success_count }}<br>
+                        <strong>Failed:</strong> {{ failed_count }}
                     </p>
                 </div>
                 
