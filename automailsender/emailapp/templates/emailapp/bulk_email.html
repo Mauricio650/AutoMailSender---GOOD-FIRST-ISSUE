@@ -1,0 +1,72 @@
+{% extends 'emailapp/base.html' %}
+
+{% block title %}Bulk Email - AutoMailSender{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-8 offset-md-2">
+        <div class="card">
+            <div class="card-header">
+                <h4>Send Bulk Emails</h4>
+            </div>
+            <div class="card-body">
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    
+                    <div class="alert alert-info">
+                        <strong>Note:</strong> Upload an Excel file with client data. The file should have at least three columns: 
+                        Client ID, Client Name, and Client Email.
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="{{ form.excel_file.id_for_label }}">Excel File:</label>
+                        {{ form.excel_file.errors }}
+                        <input type="file" name="{{ form.excel_file.name }}" 
+                               class="form-control" id="{{ form.excel_file.id_for_label }}" 
+                               accept=".xlsx,.xls" required>
+                        <small class="form-text text-muted">
+                            Upload an Excel file (.xlsx or .xls)
+                        </small>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="{{ form.subject.id_for_label }}">Subject:</label>
+                        {{ form.subject.errors }}
+                        <input type="text" name="{{ form.subject.name }}" 
+                               value="{{ form.subject.value|default:'' }}"
+                               class="form-control" id="{{ form.subject.id_for_label }}" 
+                               placeholder="Email subject" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="{{ form.body.id_for_label }}">Message:</label>
+                        {{ form.body.errors }}
+                        <textarea name="{{ form.body.name }}" 
+                                  class="form-control" id="{{ form.body.id_for_label }}" 
+                                  rows="8" placeholder="Email content" required>{{ form.body.value|default:'' }}</textarea>
+                        <small class="form-text text-muted">
+                            You can use <code>{client_name}</code> and <code>{client_id}</code> as placeholders that will be replaced with actual values from the Excel file.
+                        </small>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="{{ form.attachments.id_for_label }}">Attachments (optional):</label>
+                        {{ form.attachments.errors }}
+                        <input type="file" name="{{ form.attachments.name }}" 
+                               class="form-control" id="{{ form.attachments.id_for_label }}" 
+                               multiple>
+                        <small class="form-text text-muted">
+                            You can select multiple files to attach to all emails.
+                        </small>
+                    </div>
+                    
+                    <div class="form-group mt-4">
+                        <button type="submit" class="btn btn-primary">Send Bulk Emails</button>
+                        <a href="{% url 'home' %}" class="btn btn-secondary">Cancel</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

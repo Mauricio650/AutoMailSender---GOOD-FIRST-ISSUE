@@ -1,0 +1,79 @@
+{% extends 'emailapp/base.html' %}
+
+{% block title %}Email Settings - AutoMailSender{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-8 offset-md-2">
+        <div class="card">
+            <div class="card-header">
+                <h4>Email Settings</h4>
+            </div>
+            <div class="card-body">
+                <form method="post">
+                    {% csrf_token %}
+                    
+                    <div class="alert alert-info">
+                        <strong>Note:</strong> These settings are required to send emails. Make sure you enter valid credentials.
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="{{ form.email.id_for_label }}">Email Address:</label>
+                        {{ form.email.errors }}
+                        <input type="email" name="{{ form.email.name }}" 
+                               value="{{ form.email.value|default:'' }}"
+                               class="form-control" id="{{ form.email.id_for_label }}" 
+                               placeholder="your.email@example.com" required>
+                        <small class="form-text text-muted">Your email address for sending emails.</small>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="{{ form.password.id_for_label }}">Password:</label>
+                        {{ form.password.errors }}
+                        <input type="password" name="{{ form.password.name }}" 
+                               value="{{ form.password.value|default:'' }}"
+                               class="form-control" id="{{ form.password.id_for_label }}" 
+                               placeholder="Your password" required>
+                        <small class="form-text text-muted">
+                            Your email password. For Gmail, you'll need to use an App Password.
+                        </small>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="{{ form.smtp_server.id_for_label }}">SMTP Server:</label>
+                        {{ form.smtp_server.errors }}
+                        <input type="text" name="{{ form.smtp_server.name }}" 
+                               value="{{ form.smtp_server.value|default:'smtp.office365.com' }}"
+                               class="form-control" id="{{ form.smtp_server.id_for_label }}" 
+                               placeholder="smtp.office365.com" required>
+                        <small class="form-text text-muted">
+                            Common SMTP servers:
+                            <ul>
+                                <li>Outlook/Office 365: smtp.office365.com</li>
+                                <li>Gmail: smtp.gmail.com</li>
+                            </ul>
+                        </small>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="{{ form.smtp_port.id_for_label }}">SMTP Port:</label>
+                        {{ form.smtp_port.errors }}
+                        <input type="number" name="{{ form.smtp_port.name }}" 
+                               value="{{ form.smtp_port.value|default:'587' }}"
+                               class="form-control" id="{{ form.smtp_port.id_for_label }}" 
+                               placeholder="587" required>
+                        <small class="form-text text-muted">
+                            Common SMTP ports: 587 (TLS) or 465 (SSL)
+                        </small>
+                    </div>
+                    
+                    <div class="form-group mt-4">
+                        <button type="submit" class="btn btn-primary">Save Settings</button>
+                        <a href="{% url 'home' %}" class="btn btn-secondary">Cancel</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
